@@ -1,0 +1,29 @@
+// C++ code
+//
+#define motionPin 2
+#define ledPin 13
+
+int val = 0;
+
+uint8_t ledState = LOW;
+
+void setup()
+{
+  pinMode(ledPin, OUTPUT);
+  pinMode(motionPin, INPUT);
+  
+  attachInterrupt(digitalPinToInterrupt(motionPin), detection, CHANGE);
+  
+  Serial.begin(9600);
+}
+
+void loop()
+{
+ delay(500);
+}
+
+void detection() {
+  ledState = !ledState;
+  digitalWrite(ledPin, ledState);
+  Serial.println(ledState);
+}
